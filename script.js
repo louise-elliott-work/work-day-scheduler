@@ -3,12 +3,8 @@
 
 var currentDay = $("#currentDay");
 
-// ! The intention here is to use advancedFormat to show the date as 1st, 2nd, 3rd, 4th, etc instead of only the number.
-var advancedFormat = require('dayjs/plugin/advancedFormat')
-dayjs.extend(advancedFormat)
-
-currentDay.text(dayjs().format('dddd, MMMM Do'));
-
+// ! Figure out whether letters can be added using switchcaseto show the date as 1st, 2nd, 3rd, 4th, etc instead of only the number.
+currentDay.text(dayjs().format('dddd, MMMM D'));
 
 
 // * A table must display a day in one-hour time blocks, with the time written on the left, the time block with any text in the middle and a storage button on the right
