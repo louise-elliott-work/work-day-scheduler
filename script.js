@@ -1,26 +1,42 @@
 
-// * Current date and date in 'Monday, November 13th' format needs to display within HTML element: <p id="currentDay" class="lead"></p>
-
+// * Display current day and date
 var currentDay = $("#currentDay");
 
-// ! Figure out whether letters can be added using switchcaseto show the date as 1st, 2nd, 3rd, 4th, etc instead of only the number.
-currentDay.text(dayjs().format('dddd, MMMM D'));
+// * Capture current hour from day.js
+var currentHour = dayjs().format('HH');
+console.log(currentHour);
 
-
-// * A table must display a day in one-hour time blocks, with the time written on the left, the time block with any text in the middle and a storage button on the right
-
-
-
-
-// * Text previously entered and stored locally must display within the time blocks
-
-// * New text will be entered when the user clicks inside a time block
-
-// * The new text the user has entered will be stored locally and displayed when the user clicks the storage button
 
 // * The colour of the time block must be set according to whether it is past, present or future
+// ! The intention here is to loop through the table rows, checking the row ID against the current hour to format the cell accordingly
 
-var timeBlock = $(".time-block");
-if (timeBlock = "past") {timeBlock.addClass("past")}
-else if (timeBlock = "present") {timeBlock.addClass("present")}
-else if (timeBlock = "future") {timeBlock.addClass("future")};
+var table = document.getElementById("schedule");
+var totalRowCount = schedule.rows.length;
+console.log(totalRowCount);
+
+for (var i = 0; i < totalRowCount.length; i++) {
+    var timeBlockHour = schedule.tr.getAttribute("id");
+    console.log(timeBlockHour);
+    function formatCell () {
+        if (timeBlockHour > currentHour) {
+            $("td.time-block").addClass("past");
+        }
+        else if (timeBlockHour = currentHour) {
+            $("td.time-block").addClass("present");
+        }
+        else if (timeBlockHour < currentHour) {
+            $("td.time-block").addClass("future");
+        }  
+    }
+    formatCell () 
+}
+
+// * Test for formatting - uncomment to set as future colour for example
+// $("td.time-block").addClass("future");
+
+
+// TODO Text previously entered and stored locally must display within the time blocks
+
+// TODO Change format of input - new text will be entered when the user clicks inside a time block
+
+// TODO The new text the user has entered will be stored locally and displayed when the user clicks the storage button
