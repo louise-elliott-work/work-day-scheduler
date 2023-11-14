@@ -1,30 +1,26 @@
 
 // * Display current day and date
 var currentDay = $("#currentDay");
+currentDay.text(dayjs().format('YYYY, MMMM DD'));
 
 // * Capture current hour from day.js
 var currentHour = dayjs().format('HH');
-console.log(currentHour);
-
+currentHourInteger = parseInt(currentHour);
 
 // * The colour of the time block must be set according to whether it is past, present or future
-// ! The intention here is to loop through the table rows, checking the row ID against the current hour to format the cell accordingly
 
-var table = document.getElementById("schedule");
-var totalRowCount = schedule.rows.length;
-console.log(totalRowCount);
-
-for (var i = 0; i < totalRowCount.length; i++) {
-    var timeBlockHour = schedule.tr.getAttribute("id");
-    console.log(timeBlockHour);
+// ! for loop needs to be fixed - value is being overwritten each time and the last condition is being applied to all time blocks
+for (var i = 0; i < schedule.rows.length; i++) {
     function formatCell () {
-        if (timeBlockHour > currentHour) {
+        var timeBlockHour = schedule.rows[i].id;
+        timeBlockHourInteger = parseInt(timeBlockHour);
+        if (timeBlockHourInteger >= currentHourInteger) {
             $("td.time-block").addClass("past");
         }
-        else if (timeBlockHour = currentHour) {
+        else if (timeBlockHourInteger === currentHourInteger) {
             $("td.time-block").addClass("present");
         }
-        else if (timeBlockHour < currentHour) {
+        else if (timeBlockHourInteger <= currentHourInteger) {
             $("td.time-block").addClass("future");
         }  
     }
@@ -32,7 +28,7 @@ for (var i = 0; i < totalRowCount.length; i++) {
 }
 
 // * Test for formatting - uncomment to set as future colour for example
-// $("td.time-block").addClass("future");
+//$("td.time-block").addClass("past");
 
 
 // TODO Text previously entered and stored locally must display within the time blocks
