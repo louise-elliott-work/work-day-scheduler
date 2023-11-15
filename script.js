@@ -35,22 +35,19 @@ for (var i = 0; i < schedule.rows.length; i++) {
 // When user clicks the save button for the relevant time block, the store entry function is run.
 $('.saveBtn').click(function(){
     var timeBlockSaveButton =  $(this).parent().attr('id');
-    console.log("The save button was clicked for time block: " + timeBlockSaveButton);
-    storeEntry();
+    var userEntry = document.getElementsByClassName("text-input")[0].value;
+    console.log(userEntry);
+    console.log("The save button was clicked for time block: " + timeBlockSaveButton, userEntry);
+    storeEntry(timeBlockSaveButton,userEntry);
 });
 
 // TODO Text previously entered and stored locally must display within the time blocks
 // TODO Amend this code block so it applies to all time blocks - at the moment only set to [0] so 9am while localstorage setting and getting is resolved.
-function storeEntry() {
-    // When user enters text, it is put into local storage.
-    var userEntry = document.getElementsByClassName("text-input")[0].value;
-    console.log(userEntry);
-    console.log(typeof(userEntry));
-    localStorage.setItem("userEntry", userEntry.value);
-    console.log("User entry stored = " + userEntry);
+function storeEntry(timeBlockSaveButton,userEntry) {
+    localStorage.setItem(timeBlockSaveButton,userEntry);
     // User entry is retrieved from local storage to persist on the page.
-    localStorage.getItem("userEntry");
-    console.log("userEntry get item check: " + userEntry);
-    // ! The intention with the line below is to display the locally stored text when the page is refreshed but it does not work at the moment.
-    document.getElementsByClassName("text-input")[0].value = userEntry;
-}
+    }
+var userEntry = localStorage.getItem("09");
+console.log(userEntry);
+var HTMLelements = document.querySelectorAll(".text-input");
+HTMLelements[0].value = userEntry;
