@@ -7,10 +7,13 @@ body {
 textarea {
   background: transparent;
   border: none;
+  outline: none;
   resize: none;
   color: #000000;
-  border-left: 1px solid black;
-  padding: 10px;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  border-radius: 15px;
 }
 
 header {
@@ -22,6 +25,10 @@ header {
   padding: 60px;
 }
 
+table {
+  width: 100%;
+}
+
 .lead {
   white-space: pre-wrap;
 }
@@ -31,21 +38,13 @@ header {
   border-radius: 15px;
 }
 
-.text-input {
-  width: 100%;
-  height: 100%;
-  border-style: none;
-}
-
 .row {
   white-space: pre-wrap;
   height: 80px;
   border-top: 1px solid white;
 }
 
-table {
-  width: 100%;
-}
+
 
 .hour {
   background-color: #ffffff;

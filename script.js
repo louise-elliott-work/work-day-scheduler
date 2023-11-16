@@ -25,29 +25,34 @@ for (var i = 0; i < schedule.rows.length; i++) {
     }
     formatCell () 
 }
-
 // * Use this to test for formatting - uncomment to set as future colour for example
 //$("td.time-block").addClass("past");
 
-// * The new text the user has entered will be stored locally and displayed when the user clicks the storage button
-// TODO Check whether this needs to be a widget or writing directly in the table
 
-// When user clicks the save button for the relevant time block, the store entry function is run.
-$('.saveBtn').click(function(){
-    var timeBlockSaveButton =  $(this).parent().attr('id');
-    var userEntry = document.getElementsByClassName("text-input")[0].value;
-    console.log(userEntry);
-    console.log("The save button was clicked for time block: " + timeBlockSaveButton, userEntry);
-    storeEntry(timeBlockSaveButton,userEntry);
+// * The new text the user has entered will be stored locally and displayed when the user clicks the storage button
+
+// * When the user clicks the save button for the relevant time block the store entry function is run
+
+// Target save button clicked by the user and its parent ID to give time block reference
+const saveButton = document.getElementById('saveBtn');
+saveButton.addEventListener("click", function handleClick(event) {
+    var rowID = event.target.parentElement.id;
+    var userEntry = document.getElementsByTagName("textarea")[0].value;
+    storeEntry(rowID,userEntry);
+    console.log("user entry type = " + typeof(userEntry));
+    console.log("user entry = " + userEntry);
 });
 
-// TODO Text previously entered and stored locally must display within the time blocks
-// TODO Amend this code block so it applies to all time blocks - at the moment only set to [0] so 9am while localstorage setting and getting is resolved.
-function storeEntry(timeBlockSaveButton,userEntry) {
-    localStorage.setItem(timeBlockSaveButton,userEntry);
-    // User entry is retrieved from local storage to persist on the page.
-    }
-var userEntry = localStorage.getItem("09");
-console.log(userEntry);
-var HTMLelements = document.querySelectorAll(".text-input");
-HTMLelements[0].value = userEntry;
+// Store user entry in local storage
+function storeEntry(rowID,userEntry) {
+    localStorage.setItem(rowID,userEntry);
+    userEntry = localStorage.getItem(rowID);
+    console.log("retrieved data to display = " + userEntry);
+    var displayField = rowID;
+    console.log("display field = " + displayField);
+    // TODO debug displaying data when page is refreshed
+    var displayInfo = document.getElementById(rowID).children[1].textContent;
+    var displayInfo = document.querySelectorAll("textarea");
+    displayInfo.textContent = userEntry;
+}
+
