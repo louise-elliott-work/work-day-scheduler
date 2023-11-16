@@ -39,20 +39,20 @@ saveButton.addEventListener("click", function handleClick(event) {
     var rowID = event.target.parentElement.id;
     var userEntry = document.getElementsByTagName("textarea")[0].value;
     storeEntry(rowID,userEntry);
-    console.log("user entry type = " + typeof(userEntry));
-    console.log("user entry = " + userEntry);
 });
 
 // Store user entry in local storage
 function storeEntry(rowID,userEntry) {
     localStorage.setItem(rowID,userEntry);
-    userEntry = localStorage.getItem(rowID);
-    console.log("retrieved data to display = " + userEntry);
-    var displayField = rowID;
-    console.log("display field = " + displayField);
-    // TODO debug displaying data when page is refreshed
-    var displayInfo = document.getElementById(rowID).children[1].textContent;
-    var displayInfo = document.querySelectorAll("textarea");
-    displayInfo.textContent = userEntry;
 }
+
+// TODO make text show for all rows
+function displayData () {
+    var rowID = "09";
+    var retrievedData = localStorage.getItem("rowID");
+    console.log ("retrieved user entry = " + retrievedData);
+    const textArea = document.querySelector('textarea');
+    textArea.value = localStorage.getItem(rowID);
+}
+displayData();
 
