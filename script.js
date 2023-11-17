@@ -1,6 +1,7 @@
+
 // * Display current day and date at the top of the page.
-var currentDay = $("#currentDay");
-currentDay.text(dayjs().format('dddd, MMMM DD'));
+var currentDay = document.getElementById("currentDay");
+currentDay.textContent = (dayjs().format("dddd, MMMM DD"));
 
 // * Capture current hour from day.js to reference for formatting of time blocks.
 var currentHour = dayjs().format('HH');
@@ -8,13 +9,14 @@ var currentHour = dayjs().format('HH');
 // * Create a variable for all time blocks to use in functions below.
 const allTimeBlocks = schedule.rows;
 
-// * Format the colour of the time block according to whether it is past, present or future by checking the current hour from day.js against the ID of the time block.
+// * Loop through the time blocks to apply formatting.
 for (var i = 0; i < allTimeBlocks.length; i++) {
 
     // * Capture the ID of the time block by taking the parent row ID to reference in cell formatting function below.
     var timeBlockHour = allTimeBlocks[i].id;
     var timeBlock = document.getElementsByClassName("time-block");
 
+    // * Format the colour of the time block according to whether it is past, present or future by checking the current hour from day.js against the ID of the time block.
     function formatCell () {
         if (timeBlockHour < currentHour) {
             timeBlock[i].setAttribute("id", "past");
@@ -30,7 +32,7 @@ for (var i = 0; i < allTimeBlocks.length; i++) {
 }
 
 // * Target all of the save buttons that could be clicked by the user.
-var saveButtons = document.getElementsByClassName('saveBtn');
+var saveButtons = document.getElementsByClassName("saveBtn");
 
 // * Add an event listener to each of the save buttons and run the function when one is clicked.
 for (var i = 0 ; i < allTimeBlocks.length; i++) {
@@ -57,9 +59,12 @@ function processClick(clickedButton) {
 function showData () {
     for (var i = 0; i < allTimeBlocks.length; i++) {
         // * Iterate through all of the text areas.
-        var textAreas = document.querySelectorAll('textarea')[i];
+        var textAreas = document.querySelectorAll("textarea")[i];
+        // * Capture the ID of the text area.
         var textAreaKey = textAreas.id;
+        // * Take the hour identifier only from the text area.
         var hourOnly = textAreaKey.slice(0, 2);
+        // * Take the relevant text from local storage and add to the corresponding time block.
         textAreas.value = localStorage.getItem(hourOnly);
     }
 }
