@@ -31,7 +31,6 @@ for (var i = 0; i < allTimeBlocks.length; i++) {
 
 // * Target all of the save buttons that could be clicked by the user.
 var saveButtons = document.getElementsByClassName('saveBtn');
-console.log(saveButtons);
 
 // * Add an event listener to each of the save buttons and run the function when one is clicked.
 for (var i = 0 ; i < allTimeBlocks.length; i++) {
@@ -49,26 +48,18 @@ function processClick(clickedButton) {
 
     // * Store locally any new text the user has entered when the user clicks the save button.
     function storeEntry() {
-    localStorage.setItem(rowID,userEntry);
+    localStorage.setItem(rowID, userEntry);
     }
     storeEntry();
 
-    console.log(rowID);
-    return rowID; // ! I think this should mean I can reference rowID below.
-
 };
 
-console.log(rowID); // ! Not managing to reference rowID outside of the above this function.
-
 // TODO Display all stored data when the user clicks save and when the page is refreshed.
-for (var i = 0; i < allTimeBlocks.length; i++) {
-    function displayData (rowID) {
-        console.log(rowID); // ! Not managing to reference rowID within this function.
+//! For loop not right - work out how to access local storage with key (rowID) and display the text in the corresponding time block.
+function showData () {
+    for (var i = 0; i < allTimeBlocks.length; i++) {
         var textArea = document.querySelector('textarea');
-        console.log(textArea.value); 
-        textArea.value = localStorage.getItem(rowID);
+        textArea.value = localStorage.getItem("09");
     }
 }
-
-// * Display stored data when the user clicks 'save' and when the page is refreshed.
-displayData();
+showData();
