@@ -44,7 +44,6 @@ function processClick(clickedButton) {
     
     // * Capture the value entered into the relevant text area for the clicked button.
     var userEntry = document.getElementById(rowID + "text").value;
-    console.log("userEntry = " + userEntry);
 
     // * Store locally any new text the user has entered when the user clicks the save button.
     function storeEntry() {
@@ -59,11 +58,8 @@ function showData () {
     for (var i = 0; i < allTimeBlocks.length; i++) {
         // * Iterate through all of the text areas.
         var textAreas = document.querySelectorAll('textarea')[i];
-        console.log(textAreas);
         var textAreaKey = textAreas.id;
-        console.log(textAreaKey);
         var hourOnly = textAreaKey.slice(0, 2);
-        console.log(hourOnly);
         textAreas.value = localStorage.getItem(hourOnly);
     }
 }
