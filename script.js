@@ -54,12 +54,17 @@ function processClick(clickedButton) {
 
 };
 
-// TODO Display all stored data when the user clicks save and when the page is refreshed.
-//! For loop not right - work out how to access local storage with key (rowID) and display the text in the corresponding time block.
+// * Display all stored data when the user clicks save and when the page is refreshed.
 function showData () {
     for (var i = 0; i < allTimeBlocks.length; i++) {
-        var textArea = document.querySelector('textarea');
-        textArea.value = localStorage.getItem("09");
+        // * Iterate through all of the text areas.
+        var textAreas = document.querySelectorAll('textarea')[i];
+        console.log(textAreas);
+        var textAreaKey = textAreas.id;
+        console.log(textAreaKey);
+        var hourOnly = textAreaKey.slice(0, 2);
+        console.log(hourOnly);
+        textAreas.value = localStorage.getItem(hourOnly);
     }
 }
 showData();
